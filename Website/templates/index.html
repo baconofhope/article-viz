@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pacifico">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static',    filename='css/main.css') }}">
+    <title>Article Search</title>
+  </head>
+  <body>
+   <div >
+       <h1>Article Navigator</h1>
+       <body>Click on a tag to drill-down to relevant articles, or add a custom search term.</body>
+       <div class="box" id="search-terms-box">
+            Search path: All 
+          
+           <form style="float: right" class="form">
+                <input type="text" placeholder="custom keyword" id="searchterm">
+                <button type="submit" class="btn btn-default">Submit</button>    
+            </form> 
+        
+        </div>
+        <button id="clear" type="reset" class="btn btn-default">Clear All</button>
+        <button id="back" type="reset" class="btn btn-default">Back</button>
+    </div>
+    
+    <div class="visualization" id="word-cloud">
+        
+    </div>
+    
+    <div class="articles">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Tags</th>
+          <th>Title</th>
+          <th>Created</th>
+        </tr>
+      </thead>
+        <tbody id="result"></tbody>
+    </table>
+  </div>
+      
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="https://rawgit.com/jasondavies/d3-cloud/master/build/d3.layout.cloud.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        function removeOptions(objSelect) {
+            while (objSelect.options.length > 0)
+                objSelect.options[0] = null;
+        }
+        
+        function createWordCloud(words) {
+
+            var maxSize = d3.max(words, function(d) {
+                 return d[1];
+            });
+            console.log("max size: " + maxSize);
+            
+            d3.layout.cloud()
+                .size([600, 300])
+                .words(words
+                .map(function(d) {
+                    return {text: d[0], size: d[1]/maxSize * 100};}))
+                .padding(5)
+                .rotate(function() { return ~~(Math.random() * 0) * 90; })
+                .font("Futura")
+                .fontSize(function(d) { return d.size; })
+                .on("end", draw)
+                .start();
+        }
+              
+        function draw(words) {
+            d3.select("#word-cloud").selectAll("svg").remove();
+            
+            d3.select("#word-cloud").append("svg")
+            .attr("width", 600)
+            .attr("height", 300)
+            .append("g")
+            .attr("transform", "translate(300,150)")
+            .selectAll("text")
+            .data(words)
+            .enter().append("text")
+            .style("font-size", function(d) { return d.size + "px"; })
+            .style("font-family", "Futura")
+            .style("fill", "#000000")
+            .attr("text-anchor", "middle")
+            .attr("transform", function(d) {
+                return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+            })
+            .text(function(d) { return d.text; });
+            
+             d3.selectAll('text')
+             .on('click', function(d) {
+             // show the tooltip on mouse over
+             console.log('clicked');
+             updateCloud(d.text);
+             });
+        }
+     
+      var search_terms = [];
+        
+        function initialize() {
+            search_terms = [];
+            updateSearchBox(search_terms);
+            //var search_box = document.getElementById("search-terms-box");
+            //$("#search-terms-box").empty();
+             $.ajax({
+              data : {
+                 search_terms : search_terms,
+                     },
+                 type : 'GET',
+                 url : '/overview'
+                })
+            .done(function(data) {
+                var tags = JSON.parse(data);
+                var words = [];
+                for (var i = 0; i < tags.length; i++) {
+                    tag = tags[i];
+                    words.push([tag['key'], tag['doc_count']]);
+                }
+                createWordCloud(words)
+                  });
+        }
+        
+        function updateSearchBox(search_terms) {
+            search_term_join = d3.select("#search-terms-box")
+                             .selectAll("span")
+                             .data(search_terms);
+        
+            search_term_join.enter()
+                        .append("span")
+                        .text(function (d) {
+                            return '->' + d;
+                        });
+            
+            search_term_join.exit()
+                        .remove();
+        }
+        
+        function updateCloud(search_term) {
+            search_terms.push(search_term);
+            updateSearchBox(search_terms);
+            //var search_box = document.getElementById("search-terms-box");
+            //search_box.appendChild(document.createTextNode(search_term + '->'));
+            generateCloud();
+        }
+        
+        function generateCloud() {
+            console.log(search_terms.toString());
+           $.ajax({
+              data : {
+                 search_terms : search_terms,
+                     },
+                 type : 'POST',
+                 url : '/search'
+                })
+            .done(function(data) {
+                var response = JSON.parse(data);
+                var hit_objects = response['hits'];
+               // $('#output').text(data).show();
+                var table = document.getElementById("result");
+
+                if (table != null) {
+                  table.innerHTML = "";
+                  for (var i = 0; i < hit_objects.length; i++) {
+                    var object = hit_objects[i];
+                    var tr = document.createElement("tr");
+                    var td = null;
+                    td = document.createElement("td");
+                    td.appendChild(document.createTextNode(object['tags']));
+                    tr.appendChild(td);
+                    td = document.createElement("td");
+                    var article_link = document.createElement("A");
+                    article_link.href = object['link'];
+                    article_link.target = "_blank";
+                    article_link.innerText = object['title'];
+                    td.appendChild(article_link);
+                    //td.appendChild(document.createTextNode(object['title']));
+                    tr.appendChild(td);
+                    td = document.createElement("td");
+                    var date = new Date(object['created']);
+                    td.appendChild(document.createTextNode(date.toDateString()));
+                    tr.appendChild(td);
+                    table.appendChild(tr);
+                  }
+                }
+                var tags = response['tags'];
+                var words = [];
+                for (var i = 0; i < tags.length; i++) {
+                    tag = tags[i];
+                    words.push([tag['key'], tag['score']]);
+                }
+                createWordCloud(words);
+               });
+
+        }
+                  
+    $(document).ready(function() {
+        initialize();
+        
+         $('form').on('submit', function(event) {
+             var search_term = $('#searchterm').val();
+             updateCloud(search_term);
+             $("form").trigger("reset"); 
+             event.preventDefault();
+            });  
+        
+        $("#clear").click(function(){
+            initialize();
+        });
+        
+        $("#back").click(function(){
+            search_terms.pop();
+            updateSearchBox(search_terms);
+            generateCloud();
+            event.preventDefault();
+        });
+        
+    });
+    </script>
+  </body>
+</html>
