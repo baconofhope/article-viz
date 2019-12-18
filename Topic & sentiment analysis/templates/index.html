@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+<!--        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pacifico">-->
+<!--        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{ url_for('static',    filename='css/main.css') }}">
+        <title>Article Search</title>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Article Navigator</h1>
+            <body>Click on a tag to drill-down to relevant articles, or add a custom search term.</body>
+            <hr>
+            <div class="box" id="search-terms-box" style="margin-top:20px;">
+                You selected: All 
+
+                <form style="float: right" class="form" action="/search" method="post">
+                    <input type="text" placeholder="Search..." id="searchterm" name="query_term">
+                    <button type="submit" class="btn btn-default">Submit</button>    
+                </form> 
+
+            </div>
+            <button id="clear" type="reset" class="btn btn-default">Clear All</button>
+            <button id="back" type="reset" class="btn btn-default">Back</button>
+        </div>
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="visualization" id="sentiment-bubbles" style="width:800px;"> </div>
+                </div>
+                <div id="articles" class="col-md-4">
+                    {% for article in articles %}
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{article.title}}</h5>
+                                    <p class="card-text">{{article.publication}}</p>
+                                    <p>{{article.created}}</p>
+                                    <a href="{{ article.link }}" target="_blank" class="btn btn-primary">Click for full article</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        
+
+        <script src="http://d3js.org/d3.v5.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+            
+            function removeOptions(objSelect) {
+                while (objSelect.options.length > 0)
+                    objSelect.options[0] = null;
+            }
+            
+            function createBubbleChart() {
+                d3.select("#sentiment-bubbles").selectAll("svg").remove();
+                
+                data = d3.json("/get-data");
+                
+                var w = 800;
+                var h = 700;
+                var margin = 80;
+                
+                var rScale = d3.scaleLinear()
+                .domain(d3.extent(data, d => d.frequency)).nice()
+                .range([10, 100])
+                
+                var yScale = d3.scaleLinear()
+                .domain(d3.extent(data, d => d.avg_sentiment)).nice()
+                .range([h-margin, margin])
+                
+                var color = d3.scaleLinear()
+                        .domain([-0.7, 0, 0.7])
+                        .range(["#FF8383", "#FFFFFF", "#7097FF"])
+                        .interpolate(d3.interpolateRgb.gamma(2.2))
+                
+                const svg = d3.select("#sentiment-bubbles").append("svg")
+                .attr("viewBox", [0, 0, w, h])
+                .attr("font-size", 10)
+                .attr("font-family", "sans-serif")
+                .attr("text-anchor", "middle");
+
+                const nodes = data;
+
+                let simulation = d3.forceSimulation();
+
+                simulation = simulation
+                    .force("collide", d3.forceCollide(d => rScale(d.frequency)+10).iterations(12))
+                    .force("charge", d3.forceManyBody(50))
+                    .velocityDecay(0.75)
+                    .alphaDecay(0.006);
+
+                simulation.force('y', d3.forceY().y(function(d) {
+                    return yScale(d.avg_sentiment);
+                }))
+                    .force('x', d3.forceX().x(function(d) {
+                    return w/2;
+                }))
+
+                simulation
+                    .nodes(data);
+
+                const node = svg.selectAll("g")
+                .data(nodes)
+                .join("g")
+                .attr("class", "node")
+                .on("mouseover", mover)
+                .on("mouseout", mout);
+
+                node.append("circle")
+                    .attr("r", d => rScale(d.frequency))
+                    .attr("fill-opacity", 0.9)
+                    .attr("fill", d => color(d.avg_sentiment))
+                    .style("stroke", "#E1E0E2");
+
+                node.append("text")
+                    .selectAll("tspan")
+                    .data(d => d.name.split(/(?=[A-Z][^A-Z])/g))
+                    .join("tspan")
+                    .attr("x", 0)
+                    .attr("y", (d, i, nodes) => `${i - nodes.length / 2 + 0.8}em`)
+                    .text(d => d);
+                
+                console.log(node);
+
+                simulation.on("tick", () => {
+                    node
+                        .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+                });
+
+                function mover(d) {
+                    svg.selectAll("*").transition()
+                        .duration(20)
+                        .style("fill-opacity", 0.1);
+
+                    d3.select(this).selectAll("*")
+                        .transition()
+                        .duration(100)		  
+                        .style("fill-opacity", 1);
+
+                    d3.select(this)
+                        .style("fill-opacity", 1);
+
+                }
+
+                //Mouseout function
+                function mout(d) { 
+                    d3.select(this)
+                        .datum({selected: false});
+
+                    svg.selectAll("*").transition()
+                        .duration(20)
+                        .style("fill-opacity", 0.9);
+
+                };
+
+            }
+
+            function initialize() {
+                
+            }
+            
+/*            function updateBubbles(query) {
+                console.log(query.toString());
+                $.ajax({
+                    data : {
+                        query : query
+                     },
+                 type : 'POST',
+                 url : '/search'
+                })
+            .done(function(data) {
+                console.log("test - done")
+                var response = JSON.parse(data);
+                console.log(response['hit_count']);
+                var entity_data = response["entities"];
+                createBubbleChart(entity_data);
+                } )  
+            }*/
+
+            $(document).ready(function() {
+                console.time("main timer");
+                createBubbleChart();
+                
+                /*$('form').on('submit', function(event) {
+                    var search_term = $('#searchterm').val();
+                    console.timeLog("main timer");
+                    console.log("entered search term " + search_term);
+                    updateBubbles(search_term);
+                    $("form").trigger("reset"); 
+                    event.preventDefault();
+                });  */
+                
+                initialize();
+
+            });
+        </script>
+    </body>
+</html>
