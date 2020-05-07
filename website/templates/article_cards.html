@@ -1,0 +1,65 @@
+<div>
+    Found {{hit_count}} articles:
+</div>
+{% for article in articles %}
+<div class="card mt-2">
+    <div class="card-body" id={{article.id}}>
+        <h5 class="card-title">{{article.title}}</h5>
+        <p class="card-text">{{article.source}} <span>&#183;</span>  {{article.created}}</p>
+        <a href="{{ article.link }}" target="_blank" class="stretched-link"></a>
+        Main topics:
+        {% for topic in article.topics %}
+        <svg width="50" height="50" version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <circle cx={{40 - (topic.strength * 40)}} cy="22" r={{topic.strength * 40}} fill='gray' stroke-width="5"/>
+<!--            <text x="50" y="90" font-size="10px" style="text-anchor: middle;">{{topic.name}}</text>-->
+        </svg> {{topic.name}}
+        {% endfor %}
+    </div>
+</div>
+{% endfor %}
+
+<script>
+    
+    function createCardCharts(data) {
+        var width = 200;
+        var height = 100;
+        var sizeScale = d3.scaleSqrt().domain([0,max_count])
+        .range([0, 1]);
+        
+        data.forEach(function(d, i) {
+            var svg = $('#'+d.id).append("svg")
+            .attr("width", width)
+            .attr("height", height);
+            
+            var topics = d.topics
+            
+            data.forEach(function(d, i) {
+                d.x = (i+0.5) * width / 3;
+                d.y = height/2;
+                d.r = d.strength * 2 * d.y
+            });
+            
+            var gnodes = svg.selectAll('g.gnode')
+                .data(topics).enter().append('g').attr("class",'gnode')
+                .attr("transform", function(d) {
+                    return "translate("+d.x+","+d.y+")"
+                })
+            
+            var node = gnodes.append("circle")
+            .attr("class", "node")
+            .attr('r', function(d) {return d.r})
+            .attr('fill', function(d) {return 'transparent'})
+            .attr('stroke-width', 1)
+            .attr('stroke', 'gray');
+            
+            var labels = topic.append("text")
+            .attr("dy", 4)
+            .style("text-anchor", "middle")
+            .attr("font-size", "12px")
+            .text(function(d){return d.name});
+        });   
+    }
+
+
+</script>
+

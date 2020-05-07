@@ -1,0 +1,50 @@
+{
+  "settings": {
+    "index": {
+      "number_of_shards": 1,
+      "number_of_replicas": 0,
+      "mapping.total_fields.limit": 100,
+      "mapping.nested_fields.limit": 100,
+      "refresh_interval": "10s"
+    },
+    "analysis": {
+      "analyzer": {
+        "my_english_analyzer": {
+          "type": "standard",
+          "stopwords": "_english_"
+        }
+      }
+    }
+  },
+  "mappings": {
+    "article": {
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "created": {
+          "type": "date"
+        },
+        "title": {
+          "type": "text",
+          "analyzer": "keyword"
+        },
+        "source": {
+          "type": "text",
+          "analyzer": "english"
+        },
+        "link": {
+          "type": "text"
+        },
+        "snippet": {
+          "type": "text",
+          "analyzer": "english"
+        },
+        "body": {
+          "type": "text",
+          "analyzer": "english"
+        }
+      }
+    }
+  }
+}

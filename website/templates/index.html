@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <!--        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pacifico">-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+        <title>Article Search</title>
+    </head>
+    <body>
+        <!-- ##### Header Area Start ##### -->
+        <header> </header>
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <a class="navbar-brand" href="#">Article Search</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+
+        <hr>
+        <hr>
+        <hr>
+
+
+        <div class="container-fluid">
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-9">
+                        <h5>Select topics of interest</h5>
+                        <div class="visualization" id="search_viz" > </div>
+                    </div>
+                    <div id="custom-terms" class="col-md-3">
+                        <div class="row">
+                            <h5>Filter with custom search terms</h5>
+                            <input class="form-control mr-sm-2" id="custom-input" type="text" name="query_term" placeholder="Enter a search term" aria-label="Add">
+                        </div>
+                        <div class="row" style="height:180px;">
+                            <div id="custom-terms-container"  class="container rounded mt-2 mb-2" style="border:1px solid #cecece;"> 
+                            </div>
+                        </div>
+                        <div class="row">
+                            <button class="btn btn-outline-success my-2 my-sm-0" id="submit">Find articles</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div id="articles" class="col-md-8 bg-light">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <script src="http://d3js.org/d3.v5.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+
+
+
+            var global_data = {};
+
+            var colors = ["#C7D2DD", "#F4D58F", "#E1C5D2", "#A8AAD7", "#B8E1D9",
+                         "#DBBAE4", "#DEE487", "#A9E1C1", "#FAB88A", "#C1C39C",
+                         "#F8C2C8", "#ECCB9B", "#C2DF96", "#AAC8DB", "#8BA3B8",
+                        "#93A1AE", "#DCC8AB", "#C292AB", "#FAC8A7", "#B5AED8",
+                         "#99DBB4", "#C5D9AE", "#F2F295", "#619FC7", "#689E74"]
+            
+            function createChart(data) {
+
+                var padding = 20;
+                var flowerSize = 150;
+                var width = 1000;
+                var height = 300;
+                var circle_radius = 150;
+
+
+                var topicColor = d3.scaleSequential(d3.interpolate("#bbc5ef", "#dce1f3"))
+                .domain([0, 4])
+
+                var max_count = d3.max(data, function(d) { return +d.count;} );
+
+                var sizeScale = d3.scaleSqrt().domain([0,max_count])
+                .range([0, 1]);
+
+                var svg = d3.select(".visualization").append("svg")
+                .attr("width", width)
+                .attr("height", height);
+
+                var circleWrapper = svg.append("g")
+                .attr("class", "circle-wrapper")
+
+                // blur effect taken from visualcinnamon:
+                // http://www.visualcinnamon.com/2016/05/real-life-motion-effects-d3-visualization.html
+                var defs = svg.append("defs");
+                defs.append("filter")
+                    .attr("id", "motionFilter") 	//Give it a unique ID
+                    .attr("width", "300%")		//Increase the width of the filter region to remove blur "boundary"
+                    .attr("x", "-100%") 			//Make sure the center of the "width" lies in the middle of the element
+                    .append("feGaussianBlur")	//Append a filter technique
+                    .attr("in", "SourceGraphic")	//Perform the blur on the applied element
+                    .attr("stdDeviation", "3 3");	//Do a blur of 8 standard deviations in the horizontal and vertical direction
+
+                // create the data for each flower's colors
+                var num_topics = data.length;
+                var selected_color = 'gray';
+
+                data.forEach(function(d, i) {
+
+                    angle = (i / (num_topics/2)) * Math.PI - Math.PI / 2; // Calculate the angle at which the element will be placed.
+
+                    x = (circle_radius * Math.cos(angle)) + (width/2); // Calculate the x position of the element.
+                    y = (circle_radius * Math.sin(angle)) + (height/2); // Calculate the y position of the element.
+
+                    x = (i+0.5) * width / num_topics;
+                    y = 90;
+                    d.x = x;
+                    d.y = y;
+
+                    keywords_text = d.keywords.map(function(k) {return k.keyword});
+                    d.description = "<p>Related keywords: " + keywords_text.join(', ')+"</p>";
+
+                    d.scale = sizeScale(d.count);
+                    d.fill = topicColor(i);
+                    d.fill = colors[d.id];
+                    d.selected = false;
+                    d.r = flowerSize / 2 * d.scale;
+                });
+
+                var gnodes = circleWrapper.selectAll('g.gnode')
+                .data(data).enter().append('g')
+                .attr("transform", function(d) {
+                    return "translate("+d.x+","+d.y+")"
+                })
+                .attr("class",'gnode')
+                .on("mouseenter", function(d) {
+
+                    d3.select(this).select("circle")
+                        .transition()
+                        .duration(200)
+                        .attr('stroke-width', 2);
+
+                    d3.select(this).select("text.count")
+                        .transition()
+                        .duration(200)
+                        .attr('opacity', 1);
+
+                    d3.select(this).select(".keywords")
+                        .transition()
+                        .duration(200)
+                        .attr('opacity', 1);
+                    //node.children.show
+                })
+                .on("mouseleave", function(d) {
+                    d3.select(this).select("circle")
+                        .transition()
+                        .duration(200)
+                        .attr('stroke-width', 1);
+
+                    d3.select(this).select("text.count")
+                        .transition()
+                        .duration(200)
+                        .attr('opacity', 0);
+
+                    d3.select(this).select(".keywords")
+                        .transition()
+                        .duration(200)
+                        .attr('opacity', 0);
+                });
+
+
+                var topic = gnodes.append('g')
+                .attr("class", "topic")
+                .on("click", function(d) {
+                    d.selected = !d.selected
+                    color = d.selected ? d.fill : 'transparent';
+                    d3.select(this).select("circle")
+                        .attr('fill', color);
+                }); 
+
+                var node = topic.append("circle")
+                .attr("class", "node")
+                .attr('r', function(d) {return d.r})
+                .attr('fill', function(d) {return 'transparent'})
+                .attr('stroke-width', 1)
+                .attr('stroke', 'gray');
+                //.style("filter", "url(#motionFilter)");
+
+                var labels = topic.append("text")
+                .attr("dy", 4)
+                .style("text-anchor", "middle")
+                .attr("font-size", "16px")
+                .text(function(d){return d.name});
+
+                topic.append("text")
+                    .attr("class", "count")
+                    .attr("dy", "2em")
+                    .attr("font-size", "14px")
+                    .style("text-anchor", "middle")
+                    .attr('opacity', 0)
+                    .text(function (d) {return d.count + " articles"});
+
+                var keywords = gnodes.append('g')
+                .attr('class', 'keywords')
+                .attr('opacity', 0);
+
+                var labels = keywords.append("foreignObject")
+                .attr('width', function(d) {return d.r*2-2})
+                .attr('height', function(d) {return d.r*2-2})
+                .attr('x', function(d) {return -d.r} )
+                .attr('y', function(d) {return d.r+15} )
+                .append("xhtml:body")
+                .style("font", "14px 'Helvetica Neue'")
+                .style("text-align", "left")
+                .html(function(d){
+                    return d.description;
+                });
+
+            }
+
+            var query_topics=[];
+
+            function selectedTopics(){
+                selected = [];
+                console.log(global_data);
+                global_data.forEach(function(d, i) {
+                    if (d.selected) { selected.push(d.id)};
+                });
+                return selected;
+            }
+
+
+            function search(keywords){
+                topics = selectedTopics();
+                console.log(topics);
+                $('#articles').empty();
+                $.ajax({
+                    data : {
+                        keywords : keywords,
+                        topics: topics
+                    },
+                    type : 'POST',
+                    url : '/search' })
+                    .done(function(response) {
+                    
+                    $('#articles').append(response);
+                });
+            }
+
+            function remove(elem){
+                $(elem).parent('div').remove();
+            }
+
+            $(document).ready(function() {
+                console.time("main timer");
+
+                $('#submit').click(function(event) {
+                    var chips = $('.chip-text');
+                    var keywords = $.map(chips, function(chip) {
+                        return chip.textContent;
+                    });
+                    console.timeLog("main timer");
+                    console.log("searching " + keywords + query_topics);
+                    search(keywords);
+                });  
+
+                $('#custom-input').keypress(function(e){
+                    if (e.which === 13) {
+                        var input = $('#custom-input').val();
+                        $('#custom-terms-container').append('<div class="chip"><span class="chip-text">' + input + '</span><span class="closebtn" onclick="remove(this)">&times;</span></div>')
+                        $("#custom-input").val(""); 
+                    }
+                });
+
+
+                d3.json("/get-entity-data")
+                    .then(function(data){
+                    createChart(data);
+                    global_data = data;
+                });
+
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,1106 @@
+[
+  {
+    "id": 0,
+    "name": "Travel screening",
+    "keywords": [
+      {
+        "keyword": "official",
+        "strength": 0.047215580677360196
+      },
+      {
+        "keyword": "health",
+        "strength": 0.043663966201629566
+      },
+      {
+        "keyword": "travel",
+        "strength": 0.042340815710671095
+      },
+      {
+        "keyword": "symptom",
+        "strength": 0.03481974976206504
+      },
+      {
+        "keyword": "person",
+        "strength": 0.027971865642192253
+      },
+      {
+        "keyword": "airport",
+        "strength": 0.025859467489960306
+      },
+      {
+        "keyword": "case",
+        "strength": 0.02321316650804336
+      },
+      {
+        "keyword": "spread",
+        "strength": 0.022307853014229672
+      },
+      {
+        "keyword": "risk",
+        "strength": 0.017363448548016434
+      },
+      {
+        "keyword": "screen",
+        "strength": 0.016806332551823393
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "name": "Spreading",
+    "keywords": [
+      {
+        "keyword": "case",
+        "strength": 0.053025448553643356
+      },
+      {
+        "keyword": "spread",
+        "strength": 0.04412303185646283
+      },
+      {
+        "keyword": "infect",
+        "strength": 0.0368912486268766
+      },
+      {
+        "keyword": "number",
+        "strength": 0.031238557305016477
+      },
+      {
+        "keyword": "outbreak",
+        "strength": 0.02878982057854266
+      },
+      {
+        "keyword": "infection",
+        "strength": 0.027416697180519957
+      },
+      {
+        "keyword": "disease",
+        "strength": 0.019521237641889417
+      },
+      {
+        "keyword": "estimate",
+        "strength": 0.017507323324789454
+      },
+      {
+        "keyword": "time",
+        "strength": 0.017095386305382643
+      },
+      {
+        "keyword": "transmission",
+        "strength": 0.01434913950933724
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Cities",
+    "keywords": [
+      {
+        "keyword": "city",
+        "strength": 0.04269906998845971
+      },
+      {
+        "keyword": "hospital",
+        "strength": 0.026768945308080466
+      },
+      {
+        "keyword": "resident",
+        "strength": 0.018419206661688503
+      },
+      {
+        "keyword": "mask",
+        "strength": 0.01753671395922431
+      },
+      {
+        "keyword": "outbreak",
+        "strength": 0.01461769963568891
+      },
+      {
+        "keyword": "leave",
+        "strength": 0.012830086212748625
+      },
+      {
+        "keyword": "lockdown",
+        "strength": 0.011019844771796438
+      },
+      {
+        "keyword": "worker",
+        "strength": 0.0096847917090942
+      },
+      {
+        "keyword": "day",
+        "strength": 0.009616907655058493
+      },
+      {
+        "keyword": "build",
+        "strength": 0.009526395583010884
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Emotional coping",
+    "keywords": [
+      {
+        "keyword": "time",
+        "strength": 0.03302986321854246
+      },
+      {
+        "keyword": "thing",
+        "strength": 0.024013722126929673
+      },
+      {
+        "keyword": "make",
+        "strength": 0.021990588028323876
+      },
+      {
+        "keyword": "good",
+        "strength": 0.01400800457404231
+      },
+      {
+        "keyword": "lot",
+        "strength": 0.013656155165589127
+      },
+      {
+        "keyword": "happen",
+        "strength": 0.013480230461362536
+      },
+      {
+        "keyword": "give",
+        "strength": 0.012688569292342878
+      },
+      {
+        "keyword": "pandemic",
+        "strength": 0.011545058714870035
+      },
+      {
+        "keyword": "feel",
+        "strength": 0.011523068126841712
+      },
+      {
+        "keyword": "live",
+        "strength": 0.010951312838105291
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Social media",
+    "keywords": [
+      {
+        "keyword": "post",
+        "strength": 0.02711191045016509
+      },
+      {
+        "keyword": "video",
+        "strength": 0.022414302203849355
+      },
+      {
+        "keyword": "chinese",
+        "strength": 0.019971545915765172
+      },
+      {
+        "keyword": "government",
+        "strength": 0.019407832926207284
+      },
+      {
+        "keyword": "social",
+        "strength": 0.0171261374922825
+      },
+      {
+        "keyword": "twitter",
+        "strength": 0.01497865943682388
+      },
+      {
+        "keyword": "user",
+        "strength": 0.014951815961130648
+      },
+      {
+        "keyword": "online",
+        "strength": 0.013260676992456984
+      },
+      {
+        "keyword": "claim",
+        "strength": 0.01283118138136526
+      },
+      {
+        "keyword": "share",
+        "strength": 0.012696964002899096
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Impact on Travel",
+    "keywords": [
+      {
+        "keyword": "travel",
+        "strength": 0.044143497313758016
+      },
+      {
+        "keyword": "close",
+        "strength": 0.03530489465474982
+      },
+      {
+        "keyword": "include",
+        "strength": 0.023099205268500407
+      },
+      {
+        "keyword": "suspend",
+        "strength": 0.022703077418236736
+      },
+      {
+        "keyword": "flight",
+        "strength": 0.020771954148201332
+      },
+      {
+        "keyword": "announce",
+        "strength": 0.018444703027902257
+      },
+      {
+        "keyword": "cancel",
+        "strength": 0.01505285831001956
+      },
+      {
+        "keyword": "day",
+        "strength": 0.01495382634745364
+      },
+      {
+        "keyword": "airline",
+        "strength": 0.012997945086776758
+      },
+      {
+        "keyword": "order",
+        "strength": 0.011141095788665793
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Health tips",
+    "keywords": [
+      {
+        "keyword": "hand",
+        "strength": 0.022366082088562257
+      },
+      {
+        "keyword": "spread",
+        "strength": 0.020588469395877
+      },
+      {
+        "keyword": "avoid",
+        "strength": 0.017988379188665728
+      },
+      {
+        "keyword": "sick",
+        "strength": 0.015653604308720915
+      },
+      {
+        "keyword": "face",
+        "strength": 0.013610676288769202
+      },
+      {
+        "keyword": "touch",
+        "strength": 0.013371892494229392
+      },
+      {
+        "keyword": "good",
+        "strength": 0.012522883446976732
+      },
+      {
+        "keyword": "mask",
+        "strength": 0.012124910456077047
+      },
+      {
+        "keyword": "wash",
+        "strength": 0.012071847390623756
+      },
+      {
+        "keyword": "recommend",
+        "strength": 0.011780000530630655
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Response of governments",
+    "keywords": [
+      {
+        "keyword": "case",
+        "strength": 0.02168309164394751
+      },
+      {
+        "keyword": "state",
+        "strength": 0.016230494234461688
+      },
+      {
+        "keyword": "announce",
+        "strength": 0.012167566592763109
+      },
+      {
+        "keyword": "spread",
+        "strength": 0.011849321607773664
+      },
+      {
+        "keyword": "test",
+        "strength": 0.011053709145300052
+      },
+      {
+        "keyword": "trump",
+        "strength": 0.010502084504651682
+      },
+      {
+        "keyword": "health",
+        "strength": 0.010470260006152737
+      },
+      {
+        "keyword": "death",
+        "strength": 0.010226272184327496
+      },
+      {
+        "keyword": "day",
+        "strength": 0.009748904706843328
+      },
+      {
+        "keyword": "travel",
+        "strength": 0.009695863876011753
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Business impact",
+    "keywords": [
+      {
+        "keyword": "company",
+        "strength": 0.05052090380192126
+      },
+      {
+        "keyword": "apple",
+        "strength": 0.017670139358679476
+      },
+      {
+        "keyword": "store",
+        "strength": 0.01650656203490732
+      },
+      {
+        "keyword": "business",
+        "strength": 0.015938303341902313
+      },
+      {
+        "keyword": "customer",
+        "strength": 0.015207685022324448
+      },
+      {
+        "keyword": "production",
+        "strength": 0.014071167636314436
+      },
+      {
+        "keyword": "impact",
+        "strength": 0.013015830063590854
+      },
+      {
+        "keyword": "product",
+        "strength": 0.012934650250304424
+      },
+      {
+        "keyword": "sale",
+        "strength": 0.008172101204167231
+      },
+      {
+        "keyword": "service",
+        "strength": 0.007901501826545799
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Outbreak in China",
+    "keywords": [
+      {
+        "keyword": "chinese",
+        "strength": 0.06406654178931406
+      },
+      {
+        "keyword": "authority",
+        "strength": 0.06176969048256177
+      },
+      {
+        "keyword": "outbreak",
+        "strength": 0.036482026581036484
+      },
+      {
+        "keyword": "city",
+        "strength": 0.03336009276603336
+      },
+      {
+        "keyword": "patient",
+        "strength": 0.019088395326019088
+      },
+      {
+        "keyword": "die",
+        "strength": 0.018018018018018018
+      },
+      {
+        "keyword": "infect",
+        "strength": 0.01676924449201677
+      },
+      {
+        "keyword": "statement",
+        "strength": 0.012956025332262956
+      },
+      {
+        "keyword": "include",
+        "strength": 0.012710730532512711
+      },
+      {
+        "keyword": "visit",
+        "strength": 0.012554633841762555
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Cases and deaths",
+    "keywords": [
+      {
+        "keyword": "case",
+        "strength": 0.23377388669079888
+      },
+      {
+        "keyword": "confirm",
+        "strength": 0.10207088138732216
+      },
+      {
+        "keyword": "death",
+        "strength": 0.04486909672531358
+      },
+      {
+        "keyword": "official",
+        "strength": 0.03659819850155737
+      },
+      {
+        "keyword": "man",
+        "strength": 0.03186295142688778
+      },
+      {
+        "keyword": "woman",
+        "strength": 0.025507197575553496
+      },
+      {
+        "keyword": "die",
+        "strength": 0.021971546426466874
+      },
+      {
+        "keyword": "patient",
+        "strength": 0.02085613267110026
+      },
+      {
+        "keyword": "number",
+        "strength": 0.01894098829867834
+      },
+      {
+        "keyword": "accord",
+        "strength": 0.01866739624547521
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "name": "Testing",
+    "keywords": [
+      {
+        "keyword": "test",
+        "strength": 0.0977833221379906
+      },
+      {
+        "keyword": "state",
+        "strength": 0.04531714806640438
+      },
+      {
+        "keyword": "official",
+        "strength": 0.029867575088763074
+      },
+      {
+        "keyword": "testing",
+        "strength": 0.025093561078591307
+      },
+      {
+        "keyword": "accord",
+        "strength": 0.024157950292678247
+      },
+      {
+        "keyword": "health",
+        "strength": 0.022454658861913446
+      },
+      {
+        "keyword": "positive",
+        "strength": 0.02022358698781307
+      },
+      {
+        "keyword": "day",
+        "strength": 0.017392764609922274
+      },
+      {
+        "keyword": "local",
+        "strength": 0.015425582957489685
+      },
+      {
+        "keyword": "week",
+        "strength": 0.013794261587179734
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "name": "Virus origin",
+    "keywords": [
+      {
+        "keyword": "human",
+        "strength": 0.0530669695772422
+      },
+      {
+        "keyword": "animal",
+        "strength": 0.03876926116159621
+      },
+      {
+        "keyword": "infect",
+        "strength": 0.03131173449229554
+      },
+      {
+        "keyword": "spread",
+        "strength": 0.030521532990912682
+      },
+      {
+        "keyword": "coronaviruse",
+        "strength": 0.028274397471355194
+      },
+      {
+        "keyword": "outbreak",
+        "strength": 0.024150533386013435
+      },
+      {
+        "keyword": "market",
+        "strength": 0.020940339786645595
+      },
+      {
+        "keyword": "disease",
+        "strength": 0.020767483208218095
+      },
+      {
+        "keyword": "bat",
+        "strength": 0.0176313709996049
+      },
+      {
+        "keyword": "mer",
+        "strength": 0.01733504543658633
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "name": "Medical/Hospitals",
+    "keywords": [
+      {
+        "keyword": "patient",
+        "strength": 0.0704283762685402
+      },
+      {
+        "keyword": "hospital",
+        "strength": 0.039519906323185014
+      },
+      {
+        "keyword": "symptom",
+        "strength": 0.03481167056986729
+      },
+      {
+        "keyword": "doctor",
+        "strength": 0.031152419984387197
+      },
+      {
+        "keyword": "health",
+        "strength": 0.024760928961748634
+      },
+      {
+        "keyword": "flu",
+        "strength": 0.01878415300546448
+      },
+      {
+        "keyword": "medical",
+        "strength": 0.01800351288056206
+      },
+      {
+        "keyword": "care",
+        "strength": 0.01766198282591725
+      },
+      {
+        "keyword": "risk",
+        "strength": 0.016222677595628416
+      },
+      {
+        "keyword": "severe",
+        "strength": 0.015564012490241998
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "name": "Event cancellations",
+    "keywords": [
+      {
+        "keyword": "event",
+        "strength": 0.049959382615759544
+      },
+      {
+        "keyword": "cancel",
+        "strength": 0.03072414993617268
+      },
+      {
+        "keyword": "conference",
+        "strength": 0.017494487640710224
+      },
+      {
+        "keyword": "announce",
+        "strength": 0.017001276546361844
+      },
+      {
+        "keyword": "game",
+        "strength": 0.016972264129047232
+      },
+      {
+        "keyword": "year",
+        "strength": 0.01380991064175467
+      },
+      {
+        "keyword": "hold",
+        "strength": 0.013374724382035512
+      },
+      {
+        "keyword": "due",
+        "strength": 0.013200649878147848
+      },
+      {
+        "keyword": "show",
+        "strength": 0.012968550539630962
+      },
+      {
+        "keyword": "plan",
+        "strength": 0.012533364279911802
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "name": "Workers/Jobs",
+    "keywords": [
+      {
+        "keyword": "work",
+        "strength": 0.04935040437622315
+      },
+      {
+        "keyword": "employee",
+        "strength": 0.03032232203909363
+      },
+      {
+        "keyword": "school",
+        "strength": 0.030204428096484402
+      },
+      {
+        "keyword": "home",
+        "strength": 0.027893706821343518
+      },
+      {
+        "keyword": "worker",
+        "strength": 0.025040673410200182
+      },
+      {
+        "keyword": "community",
+        "strength": 0.017141779255381857
+      },
+      {
+        "keyword": "student",
+        "strength": 0.015114003442503124
+      },
+      {
+        "keyword": "office",
+        "strength": 0.01308622762962439
+      },
+      {
+        "keyword": "continue",
+        "strength": 0.012921176109971469
+      },
+      {
+        "keyword": "staff",
+        "strength": 0.011907288203532103
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "name": "Economy",
+    "keywords": [
+      {
+        "keyword": "market",
+        "strength": 0.029542573534151215
+      },
+      {
+        "keyword": "year",
+        "strength": 0.019788152890875106
+      },
+      {
+        "keyword": "economy",
+        "strength": 0.016414928130975656
+      },
+      {
+        "keyword": "fall",
+        "strength": 0.016264529574801796
+      },
+      {
+        "keyword": "global",
+        "strength": 0.01624304406677696
+      },
+      {
+        "keyword": "stock",
+        "strength": 0.015555507809982168
+      },
+      {
+        "keyword": "impact",
+        "strength": 0.013299529467374257
+      },
+      {
+        "keyword": "low",
+        "strength": 0.012654964226629139
+      },
+      {
+        "keyword": "drop",
+        "strength": 0.011129493156865695
+      },
+      {
+        "keyword": "economic",
+        "strength": 0.010699782996368949
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "name": "Evacuations",
+    "keywords": [
+      {
+        "keyword": "passenger",
+        "strength": 0.04252577319587629
+      },
+      {
+        "keyword": "quarantine",
+        "strength": 0.036617389612915774
+      },
+      {
+        "keyword": "flight",
+        "strength": 0.03335926862478117
+      },
+      {
+        "keyword": "citizen",
+        "strength": 0.03323769694611943
+      },
+      {
+        "keyword": "government",
+        "strength": 0.02917720287881735
+      },
+      {
+        "keyword": "chinese",
+        "strength": 0.02081307138688971
+      },
+      {
+        "keyword": "day",
+        "strength": 0.018649095506710758
+      },
+      {
+        "keyword": "evacuate",
+        "strength": 0.01804123711340206
+      },
+      {
+        "keyword": "country",
+        "strength": 0.017871036763275627
+      },
+      {
+        "keyword": "arrive",
+        "strength": 0.01563411787589963
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "name": "Information",
+    "keywords": [
+      {
+        "keyword": "information",
+        "strength": 0.0402649315787938
+      },
+      {
+        "keyword": "include",
+        "strength": 0.021737227555218393
+      },
+      {
+        "keyword": "spread",
+        "strength": 0.01817757418375981
+      },
+      {
+        "keyword": "update",
+        "strength": 0.017127184664313014
+      },
+      {
+        "keyword": "follow",
+        "strength": 0.015989262684912322
+      },
+      {
+        "keyword": "provide",
+        "strength": 0.015580777871794124
+      },
+      {
+        "keyword": "country",
+        "strength": 0.015318180491932424
+      },
+      {
+        "keyword": "datum",
+        "strength": 0.012721384179966738
+      },
+      {
+        "keyword": "site",
+        "strength": 0.012604674233361538
+      },
+      {
+        "keyword": "website",
+        "strength": 0.012458786800105039
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "name": "Government",
+    "keywords": [
+      {
+        "keyword": "government",
+        "strength": 0.018391254371591382
+      },
+      {
+        "keyword": "state",
+        "strength": 0.01755973489202475
+      },
+      {
+        "keyword": "support",
+        "strength": 0.008095086698133972
+      },
+      {
+        "keyword": "member",
+        "strength": 0.0077282398689134
+      },
+      {
+        "keyword": "plan",
+        "strength": 0.00741030595025557
+      },
+      {
+        "keyword": "policy",
+        "strength": 0.006554330015407566
+      },
+      {
+        "keyword": "group",
+        "strength": 0.006383134828437966
+      },
+      {
+        "keyword": "leave",
+        "strength": 0.006383134828437966
+      },
+      {
+        "keyword": "leader",
+        "strength": 0.0062363960967497375
+      },
+      {
+        "keyword": "rule",
+        "strength": 0.006163026730905623
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "name": "Vaccine",
+    "keywords": [
+      {
+        "keyword": "vaccine",
+        "strength": 0.04256599879611316
+      },
+      {
+        "keyword": "work",
+        "strength": 0.026858142001318544
+      },
+      {
+        "keyword": "develop",
+        "strength": 0.022759193969100238
+      },
+      {
+        "keyword": "treatment",
+        "strength": 0.019892796743772753
+      },
+      {
+        "keyword": "drug",
+        "strength": 0.01929085332645398
+      },
+      {
+        "keyword": "make",
+        "strength": 0.017026399518445267
+      },
+      {
+        "keyword": "year",
+        "strength": 0.013873362570585033
+      },
+      {
+        "keyword": "start",
+        "strength": 0.010892309456244446
+      },
+      {
+        "keyword": "test",
+        "strength": 0.010892309456244446
+      },
+      {
+        "keyword": "effort",
+        "strength": 0.009487774815833978
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "name": "Pandemic",
+    "keywords": [
+      {
+        "keyword": "country",
+        "strength": 0.08913735378001901
+      },
+      {
+        "keyword": "spread",
+        "strength": 0.052721861695531766
+      },
+      {
+        "keyword": "outbreak",
+        "strength": 0.04563303434877857
+      },
+      {
+        "keyword": "world",
+        "strength": 0.031104038358202787
+      },
+      {
+        "keyword": "emergency",
+        "strength": 0.02992601165626421
+      },
+      {
+        "keyword": "global",
+        "strength": 0.027900632414334724
+      },
+      {
+        "keyword": "measure",
+        "strength": 0.023849873930475756
+      },
+      {
+        "keyword": "health",
+        "strength": 0.02122514777001612
+      },
+      {
+        "keyword": "declare",
+        "strength": 0.020315793824660026
+      },
+      {
+        "keyword": "government",
+        "strength": 0.01911709998759972
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "name": "Trump/US government",
+    "keywords": [
+      {
+        "keyword": "trump",
+        "strength": 0.029273743016759775
+      },
+      {
+        "keyword": "official",
+        "strength": 0.024208566108007448
+      },
+      {
+        "keyword": "call",
+        "strength": 0.018522656734947237
+      },
+      {
+        "keyword": "response",
+        "strength": 0.0176536312849162
+      },
+      {
+        "keyword": "time",
+        "strength": 0.012960893854748603
+      },
+      {
+        "keyword": "crisis",
+        "strength": 0.01047796399751707
+      },
+      {
+        "keyword": "make",
+        "strength": 0.0102048417132216
+      },
+      {
+        "keyword": "term",
+        "strength": 0.009708255741775295
+      },
+      {
+        "keyword": "public",
+        "strength": 0.00968342644320298
+      },
+      {
+        "keyword": "speak",
+        "strength": 0.009013035381750465
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "name": "Scientific research",
+    "keywords": [
+      {
+        "keyword": "researcher",
+        "strength": 0.03175703785882679
+      },
+      {
+        "keyword": "study",
+        "strength": 0.01944251837470531
+      },
+      {
+        "keyword": "scientist",
+        "strength": 0.018249895992234085
+      },
+      {
+        "keyword": "find",
+        "strength": 0.017584246290389682
+      },
+      {
+        "keyword": "research",
+        "strength": 0.015309943142421302
+      },
+      {
+        "keyword": "team",
+        "strength": 0.0151435307169602
+      },
+      {
+        "keyword": "sample",
+        "strength": 0.010983220080432673
+      },
+      {
+        "keyword": "publish",
+        "strength": 0.01012342254888365
+      },
+      {
+        "keyword": "cell",
+        "strength": 0.008819858549438358
+      },
+      {
+        "keyword": "paper",
+        "strength": 0.008320621273055055
+      }
+    ]
+  }
+]
